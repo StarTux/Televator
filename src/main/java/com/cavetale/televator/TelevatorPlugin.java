@@ -39,6 +39,8 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         final int distance = block.getY() - fromBlock.getY();
         if (distance < 3) return;
         if (block.getType() != Material.GOLD_BLOCK) return;
+        if (!block.getRelative(0, 1, 0).isPassable()) return;
+        if (!block.getRelative(0, 2, 0).isPassable()) return;
         event.setCancelled(true);
         Location target = player.getLocation();
         target.setY((double) (block.getY() + 1));
