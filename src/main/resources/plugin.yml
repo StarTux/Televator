@@ -1,0 +1,13 @@
+main: com.cavetale.televator.TelevatorPlugin
+name: Televator
+version: 0.1
+api-version: 1.13
+description: Use gold blocks as elevators
+author: StarTux
+website: https://cavetale.com
+depend: []
+softdepend: []
+permissions:
+  televator.televator:
+    description: Use televators
+    default: op
