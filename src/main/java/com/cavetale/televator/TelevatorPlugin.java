@@ -42,6 +42,8 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         event.setCancelled(true);
         Location target = player.getLocation();
         target.setY((double) (block.getY() + 1));
+        target.setX((double) block.getX() + 0.5);
+        target.setZ((double) block.getZ() + 0.5);
         getServer().getScheduler().runTask(this, () -> {
                 player.teleport(target, TeleportCause.PLUGIN);
                 target.getWorld().playSound(target,
@@ -74,6 +76,8 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         if (distance < 3) return;
         if (block.getType() != Material.GOLD_BLOCK) return;
         target.setY((double) (block.getY() + 1));
+        target.setX((double) block.getX() + 0.5);
+        target.setZ((double) block.getZ() + 0.5);
         getServer().getScheduler().runTask(this, () -> {
                 player.teleport(target, TeleportCause.PLUGIN);
                 target.getWorld().playSound(target,
