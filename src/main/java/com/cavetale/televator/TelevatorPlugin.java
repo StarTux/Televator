@@ -1,7 +1,8 @@
 package com.cavetale.televator;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -27,6 +28,7 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
     public void onPlayerJump(PlayerJumpEvent event) {
         Player player = event.getPlayer();
         if (!player.hasPermission(PERM)) return;
+        if (!player.getPassengers().isEmpty()) return;
         Block fromBlock = event.getFrom().add(0, -0.1, 0).getBlock();
         if (fromBlock.getType() != Material.GOLD_BLOCK) return;
         final int top = fromBlock.getWorld()
@@ -55,8 +57,7 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                 target.getWorld().spawnParticle(Particle.SPELL_INSTANT,
                                                 target,
                                                 4, 0.25, 0, 0.25, 1.0);
-                player.sendActionBar(ChatColor.GOLD
-                                     + "Up " + distance + " blocks");
+                player.sendActionBar(Component.text("Up " + distance + " blocks", NamedTextColor.GOLD));
             });
     }
 
@@ -65,6 +66,7 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         if (!event.isSneaking()) return;
         Player player = event.getPlayer();
         if (!player.hasPermission(PERM)) return;
+        if (!player.getPassengers().isEmpty()) return;
         if (!player.isOnGround()) return;
         Location target = player.getLocation();
         Block fromBlock = target.add(0, -0.1, 0).getBlock();
@@ -89,8 +91,7 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                 target.getWorld().spawnParticle(Particle.SPELL_INSTANT,
                                                 target,
                                                 4, 0.25, 0, 0.25, 1.0);
-                player.sendActionBar(ChatColor.GOLD
-                                     + "Down " + distance + " blocks");
+                player.sendActionBar(Component.text("Down " + distance + " blocks", NamedTextColor.GOLD));
             });
     }
 }
