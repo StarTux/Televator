@@ -1,6 +1,5 @@
 package com.cavetale.televator;
 
-import com.cavetale.core.event.block.PlayerBlockAbilityQuery;
 import com.cavetale.core.event.player.PluginPlayerEvent.Detail;
 import com.cavetale.core.event.player.PluginPlayerEvent;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
@@ -34,7 +33,6 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         if (!player.getPassengers().isEmpty()) return;
         Block fromBlock = event.getFrom().add(0, -0.1, 0).getBlock();
         if (fromBlock.getType() != Material.GOLD_BLOCK) return;
-        if (!PlayerBlockAbilityQuery.Action.USE.query(player, fromBlock)) return;
         final int top = fromBlock.getWorld()
             .getHighestBlockYAt(fromBlock.getX(), fromBlock.getZ());
         Block block = fromBlock.getRelative(0, 1, 0);
@@ -77,7 +75,6 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         Location target = player.getLocation();
         Block fromBlock = target.add(0, -0.1, 0).getBlock();
         if (fromBlock.getType() != Material.GOLD_BLOCK) return;
-        if (!PlayerBlockAbilityQuery.Action.USE.query(player, fromBlock)) return;
         Block block = fromBlock.getRelative(0, -1, 0);
         while (block.getY() > 0) {
             if (!block.isPassable()) break;
