@@ -11,6 +11,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -61,7 +62,9 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                                                 4, 0.25, 0, 0.25, 1.0);
                 player.sendActionBar(Component.text("Up " + distance + " blocks", NamedTextColor.GOLD));
                 PluginPlayerEvent.Name.RIDE_TELEVATOR.ultimate(this, player)
-                    .detail(Detail.BLOCK, fromBlock).call();
+                    .detail(Detail.BLOCK, fromBlock)
+                    .detail(Detail.DIRECTION, BlockFace.UP)
+                    .call();
             });
     }
 
@@ -97,7 +100,9 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                                                 4, 0.25, 0, 0.25, 1.0);
                 player.sendActionBar(Component.text("Down " + distance + " blocks", NamedTextColor.GOLD));
                 PluginPlayerEvent.Name.RIDE_TELEVATOR.ultimate(this, player)
-                    .detail(Detail.BLOCK, fromBlock).call();
+                    .detail(Detail.BLOCK, fromBlock)
+                    .detail(Detail.DIRECTION, BlockFace.DOWN)
+                    .call();
             });
     }
 }
