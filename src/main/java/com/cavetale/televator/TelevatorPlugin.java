@@ -12,6 +12,7 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -74,7 +75,7 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         Player player = event.getPlayer();
         if (!player.hasPermission(PERM)) return;
         if (!player.getPassengers().isEmpty()) return;
-        if (!player.isOnGround()) return;
+        if (!((Entity) player).isOnGround()) return;
         Location target = player.getLocation();
         Block fromBlock = target.add(0, -0.1, 0).getBlock();
         if (fromBlock.getType() != Material.GOLD_BLOCK) return;
