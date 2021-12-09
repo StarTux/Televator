@@ -80,7 +80,8 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         Block fromBlock = target.add(0, -0.1, 0).getBlock();
         if (fromBlock.getType() != Material.GOLD_BLOCK) return;
         Block block = fromBlock.getRelative(0, -1, 0);
-        while (block.getY() > 0) {
+        final int min = block.getWorld().getMinHeight();
+        while (block.getY() >= min) {
             if (!block.isPassable()) break;
             block = block.getRelative(0, -1, 0);
         }
