@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
@@ -39,14 +40,14 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
             .getHighestBlockYAt(fromBlock.getX(), fromBlock.getZ());
         Block block = fromBlock.getRelative(0, 1, 0);
         while (block.getY() <= top) {
-            if (!block.isPassable()) break;
+            if (!isPassable(block)) break;
             block = block.getRelative(0, 1, 0);
         }
         final int distance = block.getY() - fromBlock.getY();
         if (distance < 3) return;
         if (block.getType() != Material.GOLD_BLOCK) return;
-        if (!block.getRelative(0, 1, 0).isPassable()) return;
-        if (!block.getRelative(0, 2, 0).isPassable()) return;
+        if (!isPassable(block.getRelative(0, 1, 0))) return;
+        if (!isPassable(block.getRelative(0, 2, 0))) return;
         event.setCancelled(true);
         Location target = player.getLocation();
         target.setY((double) (block.getY() + 1));
@@ -82,7 +83,7 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         Block block = fromBlock.getRelative(0, -1, 0);
         final int min = block.getWorld().getMinHeight();
         while (block.getY() >= min) {
-            if (!block.isPassable()) break;
+            if (!isPassable(block)) break;
             block = block.getRelative(0, -1, 0);
         }
         final int distance = fromBlock.getY() - block.getY();
@@ -106,5 +107,13 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                     .detail(Detail.DIRECTION, BlockFace.DOWN)
                     .call();
             });
+    }
+
+    protected boolean isPassable(Block block) {
+        Material mat = block.getType();
+        return Tag.CARPETS.isTagged(mat)
+            || mat == Material.MOSS_CARPET
+            || block.isEmpty()
+            || block.isPassable();
     }
 }
