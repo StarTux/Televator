@@ -63,10 +63,10 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                                                 target,
                                                 4, 0.25, 0, 0.25, 1.0);
                 player.sendActionBar(Component.text("Up " + distance + " blocks", NamedTextColor.GOLD));
-                PluginPlayerEvent.Name.RIDE_TELEVATOR.ultimate(this, player)
+                PluginPlayerEvent.Name.RIDE_TELEVATOR.make(this, player)
                     .detail(Detail.BLOCK, fromBlock)
                     .detail(Detail.DIRECTION, BlockFace.UP)
-                    .call();
+                    .callEvent();
             });
     }
 
@@ -102,16 +102,16 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                                                 target,
                                                 4, 0.25, 0, 0.25, 1.0);
                 player.sendActionBar(Component.text("Down " + distance + " blocks", NamedTextColor.GOLD));
-                PluginPlayerEvent.Name.RIDE_TELEVATOR.ultimate(this, player)
+                PluginPlayerEvent.Name.RIDE_TELEVATOR.make(this, player)
                     .detail(Detail.BLOCK, fromBlock)
                     .detail(Detail.DIRECTION, BlockFace.DOWN)
-                    .call();
+                    .callEvent();
             });
     }
 
     protected boolean isPassable(Block block) {
         Material mat = block.getType();
-        return Tag.CARPETS.isTagged(mat)
+        return Tag.WOOL_CARPETS.isTagged(mat)
             || mat == Material.MOSS_CARPET
             || block.isEmpty()
             || block.isPassable();
