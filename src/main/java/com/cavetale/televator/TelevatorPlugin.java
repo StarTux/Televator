@@ -16,13 +16,16 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class TelevatorPlugin extends JavaPlugin implements Listener {
     static final String PERM = "televator.televator";
+    private boolean teleporting;
 
     @Override
     public void onEnable() {
@@ -54,7 +57,8 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         target.setX((double) block.getX() + 0.5);
         target.setZ((double) block.getZ() + 0.5);
         getServer().getScheduler().runTask(this, () -> {
-                player.teleport(target, TeleportCause.PLUGIN);
+                teleporting = true;
+                if (!player.teleport(target, TeleportCause.PLUGIN)) return;
                 target.getWorld().playSound(target,
                                             Sound.ITEM_CHORUS_FRUIT_TELEPORT,
                                             SoundCategory.PLAYERS,
@@ -93,7 +97,8 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         target.setX((double) block.getX() + 0.5);
         target.setZ((double) block.getZ() + 0.5);
         getServer().getScheduler().runTask(this, () -> {
-                player.teleport(target, TeleportCause.PLUGIN);
+                teleporting = true;
+                if (!player.teleport(target, TeleportCause.PLUGIN)) return;
                 target.getWorld().playSound(target,
                                             Sound.ITEM_CHORUS_FRUIT_TELEPORT,
                                             SoundCategory.PLAYERS,
@@ -115,5 +120,12 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
             || mat == Material.MOSS_CARPET
             || block.isEmpty()
             || block.isPassable();
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    private void onPlayerTeleport(PlayerTeleportEvent event) {
+        if (!teleporting) return;
+        event.setCancelled(false);
+        teleporting = false;
     }
 }
