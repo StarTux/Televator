@@ -1,7 +1,7 @@
 package com.cavetale.televator;
 
-import com.cavetale.core.event.player.PluginPlayerEvent.Detail;
 import com.cavetale.core.event.player.PluginPlayerEvent;
+import com.cavetale.core.event.player.PluginPlayerEvent.Detail;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -18,8 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -63,7 +63,7 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                                             Sound.ITEM_CHORUS_FRUIT_TELEPORT,
                                             SoundCategory.PLAYERS,
                                             0.25f, 2.0f);
-                target.getWorld().spawnParticle(Particle.SPELL_INSTANT,
+                target.getWorld().spawnParticle(Particle.INSTANT_EFFECT,
                                                 target,
                                                 4, 0.25, 0, 0.25, 1.0);
                 player.sendActionBar(Component.text("Up " + distance + " blocks", NamedTextColor.GOLD));
@@ -103,7 +103,7 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                                             Sound.ITEM_CHORUS_FRUIT_TELEPORT,
                                             SoundCategory.PLAYERS,
                                             0.25f, 2.0f);
-                target.getWorld().spawnParticle(Particle.SPELL_INSTANT,
+                target.getWorld().spawnParticle(Particle.INSTANT_EFFECT,
                                                 target,
                                                 4, 0.25, 0, 0.25, 1.0);
                 player.sendActionBar(Component.text("Down " + distance + " blocks", NamedTextColor.GOLD));
