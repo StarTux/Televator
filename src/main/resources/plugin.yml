@@ -2,7 +2,7 @@ main: com.cavetale.televator.TelevatorPlugin
 name: Televator
 
 version: 0.1
-api-version: '1.20'
+api-version: '1.21'
 
 description: Use gold blocks as elevators
 author: StarTux
