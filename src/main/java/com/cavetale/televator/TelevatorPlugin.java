@@ -118,6 +118,7 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
         Material mat = block.getType();
         return Tag.WOOL_CARPETS.isTagged(mat)
             || mat == Material.MOSS_CARPET
+            || mat == Material.PALE_MOSS_CARPET
             || block.isEmpty()
             || block.isPassable();
     }
