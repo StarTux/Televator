@@ -5,6 +5,7 @@ import com.cavetale.core.event.player.PluginPlayerEvent.Detail;
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -63,9 +64,14 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                                             Sound.ITEM_CHORUS_FRUIT_TELEPORT,
                                             SoundCategory.PLAYERS,
                                             0.25f, 2.0f);
-                target.getWorld().spawnParticle(Particle.INSTANT_EFFECT,
-                                                target,
-                                                4, 0.25, 0, 0.25, 1.0);
+                target.getWorld().spawnParticle(
+                    Particle.INSTANT_EFFECT,
+                    target,
+                    4,
+                    0.25, 0, 0.25,
+                    1.0,
+                    new Particle.Spell(Color.YELLOW, 1f)
+                );
                 player.sendActionBar(Component.text("Up " + distance + " blocks", NamedTextColor.GOLD));
                 PluginPlayerEvent.Name.RIDE_TELEVATOR.make(this, player)
                     .detail(Detail.BLOCK, fromBlock)
