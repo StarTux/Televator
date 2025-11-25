@@ -109,9 +109,14 @@ public final class TelevatorPlugin extends JavaPlugin implements Listener {
                                             Sound.ITEM_CHORUS_FRUIT_TELEPORT,
                                             SoundCategory.PLAYERS,
                                             0.25f, 2.0f);
-                target.getWorld().spawnParticle(Particle.INSTANT_EFFECT,
-                                                target,
-                                                4, 0.25, 0, 0.25, 1.0);
+                target.getWorld().spawnParticle(
+                    Particle.INSTANT_EFFECT,
+                    target,
+                    4,
+                    0.25, 0, 0.25,
+                    1.0,
+                    new Particle.Spell(Color.YELLOW, 1f)
+                );
                 player.sendActionBar(Component.text("Down " + distance + " blocks", NamedTextColor.GOLD));
                 PluginPlayerEvent.Name.RIDE_TELEVATOR.make(this, player)
                     .detail(Detail.BLOCK, fromBlock)
